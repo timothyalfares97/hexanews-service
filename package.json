@@ -2,10 +2,9 @@
   "name": "hexanews-service",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node ./lib/server.ts",        
+    "dev": "ts-node ./lib/server.ts",
     "start": "nodemon ./dist/server.js",
     "prod": "npm run build && npm run start"
   },
@@ -24,6 +23,8 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "mongoose": "^5.2.9",
-    "nodemon": "^1.18.3"
+    "nodemon": "^1.18.3",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.1"
   }
 }

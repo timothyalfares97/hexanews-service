@@ -1,8 +1,7 @@
-// lib/app.ts
-import * as express from "express"
-import * as bodyParser from "body-parser"
+import * as express from 'express'
+import * as bodyParser from 'body-parser'
 
-import { Routes } from "./routes"
+import { Routes } from './routes'
 
 class App {
 
@@ -15,7 +14,7 @@ class App {
     this.routePrv.routes(this.app)
   }
 
-  private config(): void{
+  private config(): void {
     this.app.use(bodyParser.json())
     this.app.use(bodyParser.urlencoded({ extended: false }))
   }
