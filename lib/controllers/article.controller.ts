@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose'
 import { Request, Response } from 'express'
 
-import { ArticleSchema } from '../models'
+import { ArticleSchema } from 'models/article.model'
 
 const Article = mongoose.model('Article', ArticleSchema)
 

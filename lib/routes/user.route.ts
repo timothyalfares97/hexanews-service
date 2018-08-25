@@ -1,11 +1,12 @@
-import { UserController } from '../controllers/user'
+import { UserController } from 'controllers/user.controller'
 
-export class Routes {
+export default class UserRoutes {
 
   public userController: UserController = new UserController()
 
   public routes(app): void {
-    app.route('/user')
+
+    app.route('/')
       .post(this.userController.addNewUser)
 
     app.route('/:userId')

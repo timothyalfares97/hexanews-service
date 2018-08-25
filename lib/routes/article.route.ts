@@ -1,26 +1,17 @@
-// /lib/routes/index.ts
-import { Request, Response } from 'express'
+import { ArticleController } from 'controllers/article.controller'
 
-import { ArticleController } from '../controllers'
-
-export class Routes {
+export default class ArticleRoutes {
 
   public articleController: ArticleController = new ArticleController()
 
   public routes(app): void {
-    app.route('/')
-      .get((req: Request, res: Response) => {
-        res.status(200).send({
-          message: 'System checking: healthy'
-        })
-      })
 
-    app.route('/article')
+    app.route('/')
       .get(this.articleController.getArticles)
 
       .post(this.articleController.addNewArticle)
 
-    app.route('/article/:articleId')
+    app.route('/:articleId')
       .get(this.articleController.getArticle)
 
       .put(this.articleController.updateArticle)
