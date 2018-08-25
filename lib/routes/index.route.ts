@@ -6,6 +6,9 @@ import UserRoutes from './user.route'
 
 export class Routes {
 
+  public articleRoutes: ArticleRoutes = new ArticleRoutes()
+  public userRoutes: UserRoutes = new UserRoutes()
+
   public routes(app): void {
     app.route('/')
       .get((req: Request, res: Response) => {
@@ -14,8 +17,8 @@ export class Routes {
         })
       })
 
-    app.route('/articles', ArticleRoutes)
+    this.articleRoutes.routes(app)
 
-    app.route('/users', UserRoutes)
+    this.userRoutes.routes(app)
   }
 }

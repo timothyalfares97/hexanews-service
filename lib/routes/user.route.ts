@@ -1,4 +1,4 @@
-import { UserController } from 'controllers/user.controller'
+import { UserController } from '../controllers/user.controller'
 
 export default class UserRoutes {
 
@@ -6,10 +6,10 @@ export default class UserRoutes {
 
   public routes(app): void {
 
-    app.route('/')
+    app.route('/users')
       .post(this.userController.addNewUser)
 
-    app.route('/:userId')
+    app.route('/users/:userId')
       .get(this.userController.getUser)
 
       .put(this.userController.updateUser)

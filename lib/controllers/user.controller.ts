@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose'
 import { Request, Response } from 'express'
 
-import { UserSchema } from 'models/user.model'
+import { UserSchema } from '../models/user.model'
 
 const User = mongoose.model('User', UserSchema)
 

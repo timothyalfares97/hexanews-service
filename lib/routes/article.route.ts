@@ -1,4 +1,4 @@
-import { ArticleController } from 'controllers/article.controller'
+import { ArticleController } from '../controllers/article.controller'
 
 export default class ArticleRoutes {
 
@@ -6,12 +6,12 @@ export default class ArticleRoutes {
 
   public routes(app): void {
 
-    app.route('/')
+    app.route('/articles')
       .get(this.articleController.getArticles)
 
       .post(this.articleController.addNewArticle)
 
-    app.route('/:articleId')
+    app.route('/articles/:articleId')
       .get(this.articleController.getArticle)
 
       .put(this.articleController.updateArticle)

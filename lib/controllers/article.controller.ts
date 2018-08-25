@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose'
 import { Request, Response } from 'express'
 
-import { ArticleSchema } from 'models/article.model'
+import { ArticleSchema } from '../models/article.model'
 
 const Article = mongoose.model('Article', ArticleSchema)
 
@@ -23,7 +23,7 @@ export class ArticleController {
   public getArticles = async (req: Request, res: Response) => {
 
     try {
-      const articles = await Article.find({})
+      const articles = await Article.find()
       res.json(articles)
     } catch (err) {
       res.send(err)
