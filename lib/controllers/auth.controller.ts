@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose'
 import { Request, Response } from 'express'
+import * as jwt from 'jsonwebtoken'
 
 import { UserSchema } from '../models/user.model'
 
@@ -16,7 +17,13 @@ export class AuthController {
       if (!loggedUser) {
         res.send({ message: 'Authentication failed. There is no user found.' })
       } else {
-        res.send({ message: 'Authentication successful' })
+        loggedUser.validPassword(password, (err, isValid) => {
+          if (isValid && !err) {
+            const token = jwt.sign({ data: loggedUser }, 'superSecret', { expiresIn: '2 days' })
+            res.json({ message: 'Authentication successful.', id: loggedUser.id, token })
+          }
+          res.send({ message: 'Authentication failed. Invalid password.' })
+        })
       }
     } catch (err) {
       res.send(err)

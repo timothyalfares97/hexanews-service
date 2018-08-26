@@ -7,6 +7,6 @@ export default class AuthRoutes {
   public routes(app): void {
 
     app.route('/login')
-      .get(this.authController.login)
+      .post(this.authController.login)
   }
 }

@@ -25,6 +25,7 @@ export const UserSchema = new Schema({
 })
 
 UserSchema.pre('save', async function(next) {
+
   const user = this
   if (this.isModified('password')) {
     try {
@@ -38,4 +39,16 @@ UserSchema.pre('save', async function(next) {
   } else {
     return next()
   }
+
 })
+
+UserSchema.methods.validPassword = async function(password, callback) {
+
+  try {
+    const isValid = await bcrypt.compare(password, this.password)
+    callback(null, isValid)
+  } catch (err) {
+    return callback(err)
+  }
+
+}
