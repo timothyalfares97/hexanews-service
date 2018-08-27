@@ -27,6 +27,24 @@ npm run dev
 - Put all function arguments on the same line as the function name. If they exceed the column limit, the arguments must be line-wrapped for readibility
 - Use Javadoc comment for every class, function and method
 
+## Database schema
+### User
+{
+    email: String
+    password: String
+    name: String
+    createdAt: Date
+}
+
+### Article
+{
+    title: String
+    description:String
+    author: String
+    category: String
+    createdAt: Date
+}
+
 ## Authors
 - **Timothy Alfares**
 - **Audwin Oyong**
