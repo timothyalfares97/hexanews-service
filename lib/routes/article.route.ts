@@ -1,4 +1,7 @@
+import * as validate from 'express-validation'
+
 import { ArticleController } from '../controllers/article.controller'
+import validation from '../validations/article.validation'
 
 export default class ArticleRoutes {
 
@@ -9,13 +12,13 @@ export default class ArticleRoutes {
     app.route('/articles')
       .get(this.articleController.getArticles)
 
-      .post(this.articleController.addNewArticle)
+      .post(validate(validation.addNewArticle), this.articleController.addNewArticle)
 
     app.route('/articles/:articleId')
-      .get(this.articleController.getArticle)
+      .get(validate(validation.getArticle), this.articleController.getArticle)
 
-      .put(this.articleController.updateArticle)
+      .put(validate(validation.updateArticle), this.articleController.updateArticle)
 
-      .delete(this.articleController.deleteArticle)
+      .delete(validate(validation.deleteArticle), this.articleController.deleteArticle)
   }
 }
