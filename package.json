@@ -23,6 +23,8 @@
     "bcrypt": "^3.0.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "express-validation": "^1.0.2",
+    "joi": "^13.6.0",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.9",
     "nodemon": "^1.18.3",
