@@ -30,19 +30,19 @@ npm run dev
 ## Database schema
 ### User
 {
-    email: String
-    password: String
-    name: String
-    createdAt: Date
+      email: String
+      password: String
+      name: String
+      createdAt: Date
 }
 
 ### Article
 {
-    title: String
-    description:String
-    author: String
-    category: String
-    createdAt: Date
+      title: String
+      description:String
+      author: String
+      category: String
+      createdAt: Date
 }
 
 ## Authors
