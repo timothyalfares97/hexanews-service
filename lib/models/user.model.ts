@@ -1,5 +1,10 @@
+/**
+ * Schema model for user.
+ */
 import * as mongoose from 'mongoose'
 import * as bcrypt from 'bcrypt'
+
+import ConfigConstant from '../constants/config'
 
 const Schema = mongoose.Schema
 const saltFactor = 10
@@ -24,10 +29,10 @@ export const UserSchema = new Schema({
   }
 })
 
-UserSchema.pre('save', async function(next) {
+UserSchema.pre(ConfigConstant.SAVE, async function(next) {
 
   const user = this
-  if (this.isModified('password')) {
+  if (this.isModified(ConfigConstant.PASSWORD)) {
     try {
       const salt = await bcrypt.genSalt(saltFactor)
       const hash = await bcrypt.hash(user.password, salt)

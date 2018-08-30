@@ -1,3 +1,6 @@
+/**
+ * Handles routing for user.
+ */
 import * as validate from 'express-validation'
 
 import { UserController } from '../controllers/user.controller'

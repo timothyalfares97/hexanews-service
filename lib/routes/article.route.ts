@@ -1,3 +1,6 @@
+/**
+ * Handles routing for article.
+ */
 import * as validate from 'express-validation'
 
 import { ArticleController } from '../controllers/article.controller'

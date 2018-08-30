@@ -1,3 +1,6 @@
+/**
+ * Controller for user. Handles CRUD operations.
+ */
 import * as mongoose from 'mongoose'
 import { Request, Response } from 'express'
 
@@ -7,6 +10,9 @@ const User = mongoose.model('User', UserSchema)
 
 export class UserController {
 
+  /**
+   * Add a new user into the database.
+   */
   public addNewUser = async (req: Request, res: Response) => {
 
     const newUser = new User(req.body)
@@ -20,6 +26,9 @@ export class UserController {
 
   }
 
+  /**
+   * Get an user based on its id.
+   */
   public getUser = async (req: Request, res: Response) => {
 
     try {
@@ -31,6 +40,9 @@ export class UserController {
 
   }
 
+  /**
+   * Find and update an user by its id.
+   */
   public updateUser = async (req: Request, res: Response) => {
 
     const updateCondition = { _id: req.params.userId }
@@ -46,6 +58,9 @@ export class UserController {
 
   }
 
+  /**
+   * Delete a user based on its id.
+   */
   public deleteUser = async (req: Request, res: Response) => {
 
     const deleteCondition = { _id: req.params.userId }

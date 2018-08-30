@@ -1,3 +1,6 @@
+/**
+ * Schema model for article.
+ */
 import * as mongoose from 'mongoose'
 
 const Schema = mongoose.Schema

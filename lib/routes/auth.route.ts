@@ -1,3 +1,6 @@
+/**
+ * Handles routing for authentication.
+ */
 import { AuthController } from '../controllers/auth.controller'
 
 export default class AuthRoutes {

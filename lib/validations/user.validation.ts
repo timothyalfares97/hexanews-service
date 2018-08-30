@@ -1,3 +1,6 @@
+/**
+ * Validations for user.
+ */
 import * as Joi from 'joi'
 
 export default {

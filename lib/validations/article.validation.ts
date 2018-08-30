@@ -1,3 +1,6 @@
+/**
+ * Validations for article.
+ */
 import * as Joi from 'joi'
 
 export default {

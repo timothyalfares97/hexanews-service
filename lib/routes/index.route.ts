@@ -1,9 +1,10 @@
-// /lib/routes/index.ts
+// Handles routing for main application.
 import { Request, Response } from 'express'
 
 import ArticleRoutes from './article.route'
 import UserRoutes from './user.route'
 import AuthRoutes from './auth.route'
+import StringConstant from 'constants/string'
 
 export class Routes {
 
@@ -15,7 +16,7 @@ export class Routes {
     app.route('/')
       .get((req: Request, res: Response) => {
         res.status(200).send({
-          message: 'System checking: healthy'
+          message: StringConstant.SYSTEM_CHECK_HEALTHY
         })
       })
 
