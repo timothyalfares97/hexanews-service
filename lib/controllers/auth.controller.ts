@@ -38,4 +38,26 @@ export class AuthController {
     }
 
   }
+
+  public changePassword = async (req: Request, res: Response) => {
+
+    const { email, password, newPassword } = req.body
+
+    try {
+      const currentUser = await User.findOne({ email: email })
+      if (!currentUser) {
+        res.send({ message: 'User not found' })
+      } else {
+        currentUser.validPassword(password, async (err, isValid) => {
+          if (isValid && !err) {
+            currentUser.password = newPassword
+            await currentUser.save()
+            res.json({ message: 'Password successfully changed!' })
+          }
+        })
+      }
+    } catch (err) {
+      res.send(err)
+    }
+  }
 }

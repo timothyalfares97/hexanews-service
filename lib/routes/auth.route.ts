@@ -9,7 +9,10 @@ export default class AuthRoutes {
 
   public routes(app): void {
 
-    app.route('/login')
+    app.route('/auth/login')
       .post(this.authController.login)
+
+    app.route('/auth/changePassword')
+      .post(this.authController.changePassword)
   }
 }
