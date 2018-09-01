@@ -14,5 +14,8 @@ export default class AuthRoutes {
 
     app.route('/auth/changePassword')
       .post(this.authController.changePassword)
+
+    app.route('/auth/resetPassword')
+      .post(this.authController.resetPassword)
   }
 }
