@@ -9,8 +9,8 @@ import * as sgTransport from 'nodemailer-sendgrid-transport'
 import * as randToken from 'rand-token'
 
 import { UserSchema } from '../models/user.model'
-import ConfigConstant from '../constants/config'
-import StringConstant from '../constants/string'
+import Config from '../constants/config'
+import Strings from '../constants/string'
 
 const User = mongoose.model('User', UserSchema)
 
@@ -26,14 +26,14 @@ export class AuthController {
     try {
       const loggedUser = await User.findOne({ email: email })
       if (!loggedUser) {
-        res.send({ message: StringConstant.AUTH_FAIL_USER_NOT_FOUND })
+        res.send({ message: Strings.AUTH_FAIL_USER_NOT_FOUND })
       } else {
         loggedUser.validPassword(password, (err, isValid) => {
           if (isValid && !err) {
-            const token = jwt.sign({ data: loggedUser }, ConfigConstant.JWT_KEY, { expiresIn: ConfigConstant.JWT_EXPIRY })
-            res.json({ message: StringConstant.AUTH_SUCCESS, id: loggedUser.id, token })
+            const token = jwt.sign({ data: loggedUser }, Config.JWT_KEY, { expiresIn: Config.JWT_EXPIRY })
+            res.json({ message: Strings.AUTH_SUCCESS, id: loggedUser.id, token })
           }
-          res.send({ message: StringConstant.AUTH_FAIL_INVALID_PASSWORD })
+          res.send({ message: Strings.AUTH_FAIL_INVALID_PASSWORD })
         })
       }
     } catch (err) {

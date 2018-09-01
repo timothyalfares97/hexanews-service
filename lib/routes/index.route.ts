@@ -4,7 +4,7 @@ import { Request, Response } from 'express'
 import ArticleRoutes from './article.route'
 import UserRoutes from './user.route'
 import AuthRoutes from './auth.route'
-import StringConstant from 'constants/string'
+import Strings from '../constants/string'
 
 export class Routes {
 
@@ -16,7 +16,7 @@ export class Routes {
     app.route('/')
       .get((req: Request, res: Response) => {
         res.status(200).send({
-          message: StringConstant.SYSTEM_CHECK_HEALTHY
+          message: Strings.SYSTEM_CHECK_HEALTHY
         })
       })
 

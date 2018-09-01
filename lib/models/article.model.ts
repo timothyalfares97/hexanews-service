@@ -12,7 +12,7 @@ export const ArticleSchema = new Schema({
   description: {
     type: String,
   },
-  author: {
+  authorId: {
     type: String
   },
   category: {
