@@ -1,7 +1,10 @@
 /**
  * Handles routing for authentication.
  */
+import * as validate from 'express-validation'
+
 import { AuthController } from '../controllers/auth.controller'
+import validation from '../validations/auth.validation'
 
 export default class AuthRoutes {
 
@@ -10,12 +13,12 @@ export default class AuthRoutes {
   public routes(app): void {
 
     app.route('/auth/login')
-      .post(this.authController.login)
+      .post(validate(validation.login), this.authController.login)
 
     app.route('/auth/changePassword')
-      .post(this.authController.changePassword)
+      .post(validate(validation.changePassword), this.authController.changePassword)
 
     app.route('/auth/resetPassword')
-      .post(this.authController.resetPassword)
+      .post(validate(validation.resetPassword), this.authController.resetPassword)
   }
 }
