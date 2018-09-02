@@ -5,10 +5,12 @@ const JWT_KEY = 'superSecret'
 const JWT_EXPIRY = '2 days'
 const SAVE = 'save'
 const PASSWORD = 'password'
+const MAX_VIEWS = 10000
 
 export default {
   JWT_KEY,
   JWT_EXPIRY,
   SAVE,
-  PASSWORD
+  PASSWORD,
+  MAX_VIEWS
 }
