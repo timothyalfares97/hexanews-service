@@ -21,6 +21,10 @@ export const UserSchema = new Schema({
   },
   name: {
     type: String,
+    required: true
+  },
+  description: {
+    type: String
   },
   created_date: {
     type: Date,

@@ -27,7 +27,7 @@ export class UserController {
   }
 
   /**
-   * Get an user based on its id.
+   * Get a user based on its id.
    */
   public getUser = async (req: Request, res: Response) => {
 
@@ -41,7 +41,7 @@ export class UserController {
   }
 
   /**
-   * Find and update an user by its id.
+   * Find and update a user by its id.
    */
   public updateUser = async (req: Request, res: Response) => {
 
