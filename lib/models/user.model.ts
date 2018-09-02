@@ -24,7 +24,8 @@ export const UserSchema = new Schema({
     required: true
   },
   description: {
-    type: String
+    type: String,
+    default: ''
   },
   created_date: {
     type: Date,
@@ -33,7 +34,7 @@ export const UserSchema = new Schema({
   }
 })
 
-UserSchema.pre(Config.SAVE, async function(next) {
+UserSchema.pre(Config.SAVE, async function (next) {
 
   const user = this
   if (this.isModified(Config.PASSWORD)) {
@@ -51,7 +52,7 @@ UserSchema.pre(Config.SAVE, async function(next) {
 
 })
 
-UserSchema.methods.validPassword = async function(password, callback) {
+UserSchema.methods.validPassword = async function (password, callback) {
 
   try {
     const isValid = await bcrypt.compare(password, this.password)
