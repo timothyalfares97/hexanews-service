@@ -27,6 +27,20 @@ export class UserController {
   }
 
   /**
+   * Get all users from the database.
+   */
+  public getUsers = async (req: Request, res: Response) => {
+
+    try {
+      const users = await User.find()
+      res.json(users)
+    } catch (err) {
+      res.send(err)
+    }
+
+  }
+
+  /**
    * Get a user based on its id.
    */
   public getUser = async (req: Request, res: Response) => {

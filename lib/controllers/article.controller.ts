@@ -27,7 +27,7 @@ export class ArticleController {
   }
 
   /**
-   * Get all the articles from the database.
+   * Get all articles from the database.
    */
   public getArticles = async (req: Request, res: Response) => {
 
