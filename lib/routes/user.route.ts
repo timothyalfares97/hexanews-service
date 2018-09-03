@@ -13,6 +13,8 @@ export default class UserRoutes {
   public routes(app): void {
 
     app.route('/users')
+      .get(this.userController.getUsers)
+
       .post(validate(validation.addNewUser), this.userController.addNewUser)
 
     app.route('/users/:userId')
