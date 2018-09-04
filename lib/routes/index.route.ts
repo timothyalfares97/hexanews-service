@@ -1,4 +1,7 @@
-// Handles routing for main application.
+/**
+ * Handles routing for main application.
+ */
+
 import { Request, Response } from 'express'
 
 import ArticleRoutes from './article.route'

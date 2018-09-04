@@ -1,6 +1,7 @@
 /**
  * Handles routing for authentication.
  */
+
 import * as validate from 'express-validation'
 
 import { AuthController } from '../controllers/auth.controller'

@@ -1,6 +1,7 @@
 /**
  * Validations for authentication.
  */
+
 import * as Joi from 'joi'
 
 export default {

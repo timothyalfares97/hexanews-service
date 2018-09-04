@@ -1,6 +1,7 @@
 /**
  * Controller for Article. Handles CRUD operation.
  */
+
 import * as mongoose from 'mongoose'
 import { Request, Response } from 'express'
 
@@ -11,9 +12,9 @@ const Article = mongoose.model('Article', ArticleSchema)
 export class ArticleController {
 
   /**
-   * Add a new article into the database.
+   * Create a new article into the database.
    */
-  public addNewArticle = async (req: Request, res: Response) => {
+  public create = async (req: Request, res: Response) => {
 
     const newArticle = new Article(req.body)
 
@@ -29,7 +30,7 @@ export class ArticleController {
   /**
    * Get all articles from the database.
    */
-  public getArticles = async (req: Request, res: Response) => {
+  public getAll = async (req: Request, res: Response) => {
 
     try {
       const articles = await Article.find()
@@ -43,7 +44,7 @@ export class ArticleController {
   /**
    * Get a single article based on its id.
    */
-  public getArticle = async (req: Request, res: Response) => {
+  public get = async (req: Request, res: Response) => {
 
     try {
       const article = await Article.findById(req.params.articleId)
@@ -57,7 +58,7 @@ export class ArticleController {
   /**
    * Find and update an article based on its id.
    */
-  public updateArticle = async (req: Request, res: Response) => {
+  public update = async (req: Request, res: Response) => {
 
     const updateCondition = { _id: req.params.articleId }
     const article = req.body
@@ -75,7 +76,7 @@ export class ArticleController {
   /**
    * Delete an article based on its id.
    */
-  public deleteArticle = async (req: Request, res: Response) => {
+  public delete = async (req: Request, res: Response) => {
 
     const deleteCondition = { _id: req.params.articleId }
     try {

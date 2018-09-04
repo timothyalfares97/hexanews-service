@@ -1,10 +1,11 @@
 /**
  * Validations for article.
  */
+
 import * as Joi from 'joi'
 
 export default {
-  addNewArticle: {
+  create: {
     body: {
       title: Joi.string().required(),
       description: Joi.string().required(),
@@ -13,13 +14,13 @@ export default {
     }
   },
 
-  getArticle: {
+  get: {
     params: {
       articleId: Joi.string().hex().required()
     }
   },
 
-  updateArticle: {
+  update: {
     params: {
       articleId: Joi.string().hex().required()
     },
@@ -32,7 +33,7 @@ export default {
     }
   },
 
-  deleteArticle: {
+  delete: {
     params: {
       articleId: Joi.string().hex().required()
     }

@@ -1,6 +1,7 @@
 /**
  * Schema model for article.
  */
+
 import * as mongoose from 'mongoose'
 
 import Config from '../constants/config'

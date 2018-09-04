@@ -1,6 +1,7 @@
 /**
  * Handles routing for user.
  */
+
 import * as validate from 'express-validation'
 
 import { UserController } from '../controllers/user.controller'
@@ -13,15 +14,15 @@ export default class UserRoutes {
   public routes(app): void {
 
     app.route('/users')
-      .get(this.userController.getUsers)
+      .get(this.userController.getAll)
 
-      .post(validate(validation.addNewUser), this.userController.addNewUser)
+      .post(validate(validation.create), this.userController.create)
 
     app.route('/users/:userId')
-      .get(validate(validation.getUser), this.userController.getUser)
+      .get(validate(validation.get), this.userController.get)
 
-      .put(validate(validation.updateUser), this.userController.updateUser)
+      .put(validate(validation.update), this.userController.update)
 
-      .delete(validate(validation.deleteUser), this.userController.deleteUser)
+      .delete(validate(validation.delete), this.userController.delete)
   }
 }

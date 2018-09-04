@@ -1,6 +1,7 @@
 /**
  * Controller for authentication.
  */
+
 import * as mongoose from 'mongoose'
 import { Request, Response } from 'express'
 import * as jwt from 'jsonwebtoken'

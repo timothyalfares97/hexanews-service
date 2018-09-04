@@ -1,6 +1,7 @@
 /**
  * Controller for user. Handles CRUD operations.
  */
+
 import * as mongoose from 'mongoose'
 import { Request, Response } from 'express'
 
@@ -13,7 +14,7 @@ export class UserController {
   /**
    * Add a new user into the database.
    */
-  public addNewUser = async (req: Request, res: Response) => {
+  public create = async (req: Request, res: Response) => {
 
     const newUser = new User(req.body)
 
@@ -29,7 +30,7 @@ export class UserController {
   /**
    * Get all users from the database.
    */
-  public getUsers = async (req: Request, res: Response) => {
+  public getAll = async (req: Request, res: Response) => {
 
     try {
       const users = await User.find()
@@ -43,7 +44,7 @@ export class UserController {
   /**
    * Get a user based on its id.
    */
-  public getUser = async (req: Request, res: Response) => {
+  public get = async (req: Request, res: Response) => {
 
     try {
       const user = await User.findById(req.params.userId)
@@ -57,7 +58,7 @@ export class UserController {
   /**
    * Find and update a user by its id.
    */
-  public updateUser = async (req: Request, res: Response) => {
+  public update = async (req: Request, res: Response) => {
 
     const updateCondition = { _id: req.params.userId }
     const user = req.body
@@ -75,7 +76,7 @@ export class UserController {
   /**
    * Delete a user based on its id.
    */
-  public deleteUser = async (req: Request, res: Response) => {
+  public delete = async (req: Request, res: Response) => {
 
     const deleteCondition = { _id: req.params.userId }
     try {
