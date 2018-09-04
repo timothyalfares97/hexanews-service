@@ -19,7 +19,6 @@ export const UserSchema = new Schema({
   password: {
     type: String,
     required: true,
-    select: false
   },
   name: {
     type: String,
@@ -62,5 +61,13 @@ UserSchema.methods.validPassword = async function (password, callback) {
   } catch (err) {
     return callback(err)
   }
+
+}
+
+UserSchema.methods.toJSON = function() {
+
+  const obj = this.toObject()
+  delete obj.password
+  return obj
 
 }
