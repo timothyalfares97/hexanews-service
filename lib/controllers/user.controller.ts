@@ -3,9 +3,11 @@
  */
 
 import * as mongoose from 'mongoose'
+import * as jwt from 'jsonwebtoken'
 import { Request, Response } from 'express'
 
 import { UserSchema } from '../models/user.model'
+import Config from '../constants/config'
 
 const User = mongoose.model('User', UserSchema)
 
@@ -17,12 +19,14 @@ export class UserController {
   public create = async (req: Request, res: Response) => {
 
     const newUser = new User(req.body)
+    const token = req.headers.token
 
     try {
+      await jwt.verify(token, Config.JWT_KEY)
       const savedUser = await newUser.save()
-      res.json(savedUser)
+      res.json({ message: savedUser, code: 'SUCCESS' })
     } catch (err) {
-      res.send(err)
+      res.send({ message: err, code: 'ERROR' })
     }
 
   }
@@ -63,8 +67,10 @@ export class UserController {
     const updateCondition = { _id: req.params.userId }
     const user = req.body
     const updateOption = { new: true }
+    const token = req.headers.token
 
     try {
+      await jwt.verify(token, Config.JWT_KEY)
       const edittedUser = await User.findOneAndUpdate(updateCondition, user, updateOption)
       res.json(edittedUser)
     } catch (err) {
@@ -79,11 +85,14 @@ export class UserController {
   public delete = async (req: Request, res: Response) => {
 
     const deleteCondition = { _id: req.params.userId }
+    const token = req.headers.token
+
     try {
-      const deletedUser = await User.remove(deleteCondition)
-      res.json(deletedUser)
+      await jwt.verify(token, Config.JWT_KEY)
+      await User.remove(deleteCondition)
+      res.json({ message: 'user deleted', code: 'SUCCESS' })
     } catch (err) {
-      res.send(err)
+      res.send({ message: err, code: 'ERROR' })
     }
 
   }
