@@ -3,9 +3,11 @@
  */
 
 import * as mongoose from 'mongoose'
+import * as jwt from 'jsonwebtoken'
 import { Request, Response } from 'express'
 
 import { ArticleSchema } from '../models/article.model'
+import Config from '../constants/config'
 
 const Article = mongoose.model('Article', ArticleSchema)
 
@@ -17,12 +19,14 @@ export class ArticleController {
   public create = async (req: Request, res: Response) => {
 
     const newArticle = new Article(req.body)
+    const token = req.headers.token
 
     try {
+      await jwt.verify(token, Config.JWT_KEY)
       const savedArticle = await newArticle.save()
-      res.json(savedArticle)
+      res.json({ message: savedArticle, code: 'SUCCESS' })
     } catch (err) {
-      res.send(err)
+      res.send({ message: err, code: 'ERROR' })
     }
 
   }
@@ -63,8 +67,10 @@ export class ArticleController {
     const updateCondition = { _id: req.params.articleId }
     const article = req.body
     const updateOption = { new: true }
+    const token = req.headers.token
 
     try {
+      await jwt.verify(token, Config.JWT_KEY)
       const edittedArticle = await Article.findOneAndUpdate(updateCondition, article, updateOption)
       res.json(edittedArticle)
     } catch (err) {
@@ -79,11 +85,14 @@ export class ArticleController {
   public delete = async (req: Request, res: Response) => {
 
     const deleteCondition = { _id: req.params.articleId }
+    const token = req.headers.token
+
     try {
-      const deletedArticle = await Article.remove(deleteCondition)
-      res.json(deletedArticle)
+      await jwt.verify(token, Config.JWT_KEY)
+      await Article.remove(deleteCondition)
+      res.json({ message: 'article deleted', code: 'SUCCESS' })
     } catch (err) {
-      res.send(err)
+      res.send({ message: err, code: 'ERROR' })
     }
 
   }
