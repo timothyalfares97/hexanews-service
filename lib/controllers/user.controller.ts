@@ -19,14 +19,12 @@ export class UserController {
   public create = async (req: Request, res: Response) => {
 
     const newUser = new User(req.body)
-    const token = req.headers.token
 
     try {
-      await jwt.verify(token, Config.JWT_KEY)
       const savedUser = await newUser.save()
-      res.json({ message: savedUser, code: 'SUCCESS' })
+      res.json(savedUser)
     } catch (err) {
-      res.send({ message: err, code: 'ERROR' })
+      res.send(err)
     }
 
   }
