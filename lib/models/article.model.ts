@@ -29,7 +29,7 @@ export const ArticleSchema = new Schema({
     type: Number,
     default: 0
   },
-  created_date: {
+  createdAt: {
     type: Date,
     default: Date.now
   }
