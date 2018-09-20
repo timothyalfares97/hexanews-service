@@ -50,18 +50,19 @@ export class AuthController {
     try {
       const currentUser = await User.findOne({ email: email })
       if (!currentUser) {
-        res.send({ message: 'User not found' })
+        res.send({ message: 'User is not found', code: 'ERROR' })
       } else {
         currentUser.validPassword(password, async (err, isValid) => {
           if (isValid && !err) {
             currentUser.password = newPassword
             await currentUser.save()
-            res.json({ message: 'Password successfully changed!' })
+            res.json({ message: 'Password successfully changed!', code: 'SUCCESS' })
           }
+          res.json({ message: 'Current password is wrong', code: 'ERROR' })
         })
       }
     } catch (err) {
-      res.send(err)
+      res.send({ message: err, code: 'ERROR' })
     }
   }
 
