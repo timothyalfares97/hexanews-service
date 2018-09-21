@@ -70,9 +70,9 @@ export class UserController {
     try {
       await jwt.verify(token, Config.JWT_KEY)
       const edittedUser = await User.findOneAndUpdate(updateCondition, user, updateOption)
-      res.json(edittedUser)
+      res.json({ message: edittedUser, code: 'SUCCESS' })
     } catch (err) {
-      res.send(err)
+      res.send({ message: err, code: 'ERROR' })
     }
 
   }
