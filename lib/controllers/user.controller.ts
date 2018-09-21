@@ -36,9 +36,9 @@ export class UserController {
 
     try {
       const users = await User.find()
-      res.json(users)
+      res.json({ message: users, code: 'SUCCESS' })
     } catch (err) {
-      res.send(err)
+      res.send({ message: err, code: 'ERROR' })
     }
 
   }
@@ -50,9 +50,9 @@ export class UserController {
 
     try {
       const user = await User.findById(req.params.userId)
-      res.json(user)
+      res.json({ message: user, code: 'SUCCESS' })
     } catch (err) {
-      res.send(err)
+      res.send({ message: err, code: 'ERROR' })
     }
 
   }

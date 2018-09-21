@@ -18,9 +18,9 @@ export class CategoryController {
 
     try {
       const categories = await Category.find()
-      res.json(categories)
+      res.json({ message: categories, code: 'SUCCESS' })
     } catch (err) {
-      res.send(err)
+      res.send({ message: err, code: 'ERROR' })
     }
 
   }

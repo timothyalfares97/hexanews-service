@@ -38,9 +38,9 @@ export class ArticleController {
 
     try {
       const articles = await Article.find()
-      res.json(articles)
+      res.json({ message: articles, code: 'SUCCESS' })
     } catch (err) {
-      res.send(err)
+      res.send({ message: err, code: 'ERROR' })
     }
 
   }
@@ -52,9 +52,9 @@ export class ArticleController {
 
     try {
       const article = await Article.findById(req.params.articleId)
-      res.json(article)
+      res.json({ message: article, code: 'SUCCESS' })
     } catch (err) {
-      res.send(err)
+      res.send({ message: err, code: 'ERROR' })
     }
 
   }
