@@ -72,9 +72,9 @@ export class ArticleController {
     try {
       await jwt.verify(token, Config.JWT_KEY)
       const edittedArticle = await Article.findOneAndUpdate(updateCondition, article, updateOption)
-      res.json(edittedArticle)
+      res.json({ message: edittedArticle, code: 'SUCCESS' })
     } catch (err) {
-      res.send(err)
+      res.send({ message: err, code: 'ERROR' })
     }
 
   }
