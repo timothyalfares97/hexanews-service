@@ -19,11 +19,11 @@ export class UserController {
   public create = async (req: Request, res: Response) => {
 
     const newUser = new User(req.body)
-    const { email } = req.body.email
+    const { email } = req.body
 
     try {
-      const existingUser = await User.find({ email })
-      if (existingUser) {
+      const existingUsers = await User.find({ email: email })
+      if (existingUsers.length > 0) {
         res.send({ message: 'Email is already existed, use another email', code: 'ERROR' })
       } else {
         const savedUser = await newUser.save()
