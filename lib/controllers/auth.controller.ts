@@ -27,18 +27,18 @@ export class AuthController {
     try {
       const loggedUser = await User.findOne({ email: email })
       if (!loggedUser) {
-        res.send({ message: Strings.AUTH_FAIL_USER_NOT_FOUND })
+        res.send({ message: Strings.AUTH_FAIL_USER_NOT_FOUND, code: 'ERROR' })
       } else {
         const isValid = await loggedUser.validPassword(password)
         if (isValid) {
           const token = jwt.sign({ data: loggedUser }, Config.JWT_KEY, { expiresIn: Config.JWT_EXPIRY })
-          res.json({ message: Strings.AUTH_SUCCESS, id: loggedUser.id, token })
+          res.json({ message: Strings.AUTH_SUCCESS, id: loggedUser.id, token, code: 'SUCCESS' })
         } else {
-          res.send({ message: Strings.AUTH_FAIL_INVALID_PASSWORD })
+          res.send({ message: Strings.AUTH_FAIL_INVALID_PASSWORD, code: 'ERROR' })
         }
       }
     } catch (err) {
-      res.send(err)
+      res.send({ message: err, code: 'ERROR' })
     }
 
   }

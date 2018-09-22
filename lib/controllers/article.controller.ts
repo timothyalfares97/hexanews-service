@@ -26,7 +26,10 @@ export class ArticleController {
       const savedArticle = await newArticle.save()
       res.json({ message: savedArticle, code: 'SUCCESS' })
     } catch (err) {
-      res.send({ message: err, code: 'ERROR' })
+      let mappedError = err.name === 'JsonWebTokenError' ?
+        { message: 'Session expired, please relogin', code: 'JWTERROR' } :
+        { message: err, code: 'ERROR' }
+      res.send(mappedError)
     }
 
   }
@@ -34,7 +37,7 @@ export class ArticleController {
   /**
    * Get all articles from the database.
    */
-  public getAll = async (req: Request, res: Response) => {
+  public getAll = async (_: Request, res: Response) => {
 
     try {
       const articles = await Article.find()
@@ -74,7 +77,10 @@ export class ArticleController {
       const edittedArticle = await Article.findOneAndUpdate(updateCondition, article, updateOption)
       res.json({ message: edittedArticle, code: 'SUCCESS' })
     } catch (err) {
-      res.send({ message: err, code: 'ERROR' })
+      let mappedError = err.name === 'JsonWebTokenError' ?
+        { message: 'Session expired, please relogin', code: 'JWTERROR' } :
+        { message: err, code: 'ERROR' }
+      res.send(mappedError)
     }
 
   }
@@ -92,7 +98,10 @@ export class ArticleController {
       await Article.remove(deleteCondition)
       res.json({ message: 'article deleted', code: 'SUCCESS' })
     } catch (err) {
-      res.send({ message: err, code: 'ERROR' })
+      let mappedError = err.name === 'JsonWebTokenError' ?
+        { message: 'Session expired, please relogin', code: 'JWTERROR' } :
+        { message: err, code: 'ERROR' }
+      res.send(mappedError)
     }
 
   }
