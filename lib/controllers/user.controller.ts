@@ -78,7 +78,10 @@ export class UserController {
       const edittedUser = await User.findOneAndUpdate(updateCondition, user, updateOption)
       res.json({ message: edittedUser, code: 'SUCCESS' })
     } catch (err) {
-      res.send({ message: err, code: 'ERROR' })
+      let mappedError = err.name === 'JsonWebTokenError' ?
+        { message: 'Session expired, please relogin', code: 'JWTERROR' } :
+        { message: err, code: 'ERROR' }
+      res.send(mappedError)
     }
 
   }

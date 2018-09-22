@@ -35,31 +35,23 @@ export const UserSchema = new Schema({
   }
 })
 
-UserSchema.pre(Config.SAVE, async function (next) {
+UserSchema.pre(Config.SAVE, async function () {
 
-  const user = this
   if (this.isModified(Config.PASSWORD)) {
-    try {
-      const salt = await bcrypt.genSalt(saltFactor)
-      const hash = await bcrypt.hash(user.password, salt)
-      user.password = hash
-      next()
-    } catch (err) {
-      return next(err)
-    }
-  } else {
-    return next()
+    const salt = await bcrypt.genSalt(saltFactor)
+    const hash = await bcrypt.hash(this.password, salt)
+    this.password = hash
   }
 
 })
 
-UserSchema.methods.validPassword = async function (password, callback) {
+UserSchema.methods.validPassword = async function (password) {
 
   try {
     const isValid = await bcrypt.compare(password, this.password)
-    callback(null, isValid)
+    return isValid
   } catch (err) {
-    return callback(err)
+    return err
   }
 
 }

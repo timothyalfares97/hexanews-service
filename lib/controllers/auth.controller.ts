@@ -29,13 +29,13 @@ export class AuthController {
       if (!loggedUser) {
         res.send({ message: Strings.AUTH_FAIL_USER_NOT_FOUND })
       } else {
-        loggedUser.validPassword(password, (err, isValid) => {
-          if (isValid && !err) {
-            const token = jwt.sign({ data: loggedUser }, Config.JWT_KEY, { expiresIn: Config.JWT_EXPIRY })
-            res.json({ message: Strings.AUTH_SUCCESS, id: loggedUser.id, token })
-          }
+        const isValid = await loggedUser.validPassword(password)
+        if (isValid) {
+          const token = jwt.sign({ data: loggedUser }, Config.JWT_KEY, { expiresIn: Config.JWT_EXPIRY })
+          res.json({ message: Strings.AUTH_SUCCESS, id: loggedUser.id, token })
+        } else {
           res.send({ message: Strings.AUTH_FAIL_INVALID_PASSWORD })
-        })
+        }
       }
     } catch (err) {
       res.send(err)
@@ -46,23 +46,28 @@ export class AuthController {
   public changePassword = async (req: Request, res: Response) => {
 
     const { email, password, newPassword } = req.body
+    const token = req.headers.token
 
     try {
+      await jwt.verify(token, Config.JWT_KEY)
       const currentUser = await User.findOne({ email: email })
       if (!currentUser) {
         res.send({ message: 'User is not found', code: 'ERROR' })
       } else {
-        currentUser.validPassword(password, async (err, isValid) => {
-          if (isValid && !err) {
-            currentUser.password = newPassword
-            await currentUser.save()
-            res.json({ message: 'Password successfully changed!', code: 'SUCCESS' })
-          }
-          res.json({ message: 'Current password is wrong', code: 'ERROR' })
-        })
+        const isValid = await currentUser.validPassword(password)
+        if (isValid) {
+          currentUser.password = newPassword
+          await currentUser.save()
+          res.json({ message: 'Password successfully changed!', code: 'SUCCESS' })
+        } else {
+          res.send({ message: 'Current password is wrong', code: 'ERROR' })
+        }
       }
     } catch (err) {
-      res.send({ message: err, code: 'ERROR' })
+      let mappedError = err.name === 'JsonWebTokenError' ?
+        { message: 'Session expired, please relogin', code: 'JWTERROR' } :
+        { message: err, code: 'ERROR' }
+      res.send(mappedError)
     }
   }
 
