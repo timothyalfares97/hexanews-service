@@ -8,6 +8,7 @@ import { Request, Response } from 'express'
 
 import { ArticleSchema } from '../models/article.model'
 import Config from '../constants/config'
+import Strings from '../constants/string'
 
 const Article = mongoose.model('Article', ArticleSchema)
 
@@ -24,11 +25,11 @@ export class ArticleController {
     try {
       await jwt.verify(token, Config.JWT_KEY)
       const savedArticle = await newArticle.save()
-      res.json({ message: savedArticle, code: 'SUCCESS' })
+      res.json({ message: savedArticle, code: Config.RESPONSE_CODE.success })
     } catch (err) {
-      let mappedError = err.name === 'JsonWebTokenError' ?
-        { message: 'Session expired, please relogin', code: 'JWTERROR' } :
-        { message: err, code: 'ERROR' }
+      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR ?
+        { message: Strings.JWT_SESSION_EXPIRED, code: Config.RESPONSE_CODE.jwtError } :
+        { message: err, code: Config.RESPONSE_CODE.error }
       res.send(mappedError)
     }
 
@@ -41,9 +42,9 @@ export class ArticleController {
 
     try {
       const articles = await Article.find()
-      res.json({ message: articles, code: 'SUCCESS' })
+      res.json({ message: articles, code: Config.RESPONSE_CODE.success })
     } catch (err) {
-      res.send({ message: err, code: 'ERROR' })
+      res.send({ message: err, code: Config.RESPONSE_CODE.error })
     }
 
   }
@@ -55,9 +56,9 @@ export class ArticleController {
 
     try {
       const article = await Article.findById(req.params.articleId)
-      res.json({ message: article, code: 'SUCCESS' })
+      res.json({ message: article, code: Config.RESPONSE_CODE.success })
     } catch (err) {
-      res.send({ message: err, code: 'ERROR' })
+      res.send({ message: err, code: Config.RESPONSE_CODE.error })
     }
 
   }
@@ -75,11 +76,11 @@ export class ArticleController {
     try {
       await jwt.verify(token, Config.JWT_KEY)
       const edittedArticle = await Article.findOneAndUpdate(updateCondition, article, updateOption)
-      res.json({ message: edittedArticle, code: 'SUCCESS' })
+      res.json({ message: edittedArticle, code: Config.RESPONSE_CODE.success })
     } catch (err) {
-      let mappedError = err.name === 'JsonWebTokenError' ?
-        { message: 'Session expired, please relogin', code: 'JWTERROR' } :
-        { message: err, code: 'ERROR' }
+      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR ?
+        { message: Strings.JWT_SESSION_EXPIRED, code: Config.RESPONSE_CODE.jwtError } :
+        { message: err, code: Config.RESPONSE_CODE.error }
       res.send(mappedError)
     }
 
@@ -96,11 +97,11 @@ export class ArticleController {
     try {
       await jwt.verify(token, Config.JWT_KEY)
       await Article.remove(deleteCondition)
-      res.json({ message: 'article deleted', code: 'SUCCESS' })
+      res.json({ message: Strings.ARTICLE_SUCCESS_DELETED, code: Config.RESPONSE_CODE.success })
     } catch (err) {
-      let mappedError = err.name === 'JsonWebTokenError' ?
-        { message: 'Session expired, please relogin', code: 'JWTERROR' } :
-        { message: err, code: 'ERROR' }
+      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR ?
+        { message: Strings.JWT_SESSION_EXPIRED, code: Config.RESPONSE_CODE.jwtError } :
+        { message: err, code: Config.RESPONSE_CODE.error }
       res.send(mappedError)
     }
 

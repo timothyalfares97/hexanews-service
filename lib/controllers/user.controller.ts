@@ -8,6 +8,7 @@ import { Request, Response } from 'express'
 
 import { UserSchema } from '../models/user.model'
 import Config from '../constants/config'
+import Strings from '../constants/string'
 
 const User = mongoose.model('User', UserSchema)
 
@@ -24,13 +25,13 @@ export class UserController {
     try {
       const existingUsers = await User.find({ email: email })
       if (existingUsers.length > 0) {
-        res.send({ message: 'Email is already existed, use another email', code: 'ERROR' })
+        res.send({ message: Strings.USER_FAIL_ALREADY_EXISTED, code: Config.RESPONSE_CODE.error })
       } else {
         const savedUser = await newUser.save()
-        res.json({ message: savedUser, code: 'SUCCESS' })
+        res.json({ message: savedUser, code: Config.RESPONSE_CODE.success })
       }
     } catch (err) {
-      res.send({ message: err, code: 'ERROR' })
+      res.send({ message: err, code: Config.RESPONSE_CODE.error })
     }
 
   }
@@ -42,9 +43,9 @@ export class UserController {
 
     try {
       const users = await User.find()
-      res.json({ message: users, code: 'SUCCESS' })
+      res.json({ message: users, code: Config.RESPONSE_CODE.success })
     } catch (err) {
-      res.send({ message: err, code: 'ERROR' })
+      res.send({ message: err, code: Config.RESPONSE_CODE.error })
     }
 
   }
@@ -56,9 +57,9 @@ export class UserController {
 
     try {
       const user = await User.findById(req.params.userId)
-      res.json({ message: user, code: 'SUCCESS' })
+      res.json({ message: user, code: Config.RESPONSE_CODE.success })
     } catch (err) {
-      res.send({ message: err, code: 'ERROR' })
+      res.send({ message: err, code: Config.RESPONSE_CODE.error })
     }
 
   }
@@ -76,11 +77,11 @@ export class UserController {
     try {
       await jwt.verify(token, Config.JWT_KEY)
       const edittedUser = await User.findOneAndUpdate(updateCondition, user, updateOption)
-      res.json({ message: edittedUser, code: 'SUCCESS' })
+      res.json({ message: edittedUser, code: Config.RESPONSE_CODE.success })
     } catch (err) {
-      let mappedError = err.name === 'JsonWebTokenError' ?
-        { message: 'Session expired, please relogin', code: 'JWTERROR' } :
-        { message: err, code: 'ERROR' }
+      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR ?
+        { message: Strings.JWT_SESSION_EXPIRED, code: Config.RESPONSE_CODE.jwtError } :
+        { message: err, code: Config.RESPONSE_CODE.error }
       res.send(mappedError)
     }
 
@@ -97,9 +98,9 @@ export class UserController {
     try {
       await jwt.verify(token, Config.JWT_KEY)
       await User.remove(deleteCondition)
-      res.json({ message: 'user deleted', code: 'SUCCESS' })
+      res.json({ message: Strings.USER_SUCCESS_DELETE, code: Config.RESPONSE_CODE.success })
     } catch (err) {
-      res.send({ message: err, code: 'ERROR' })
+      res.send({ message: err, code: Config.RESPONSE_CODE.error })
     }
 
   }

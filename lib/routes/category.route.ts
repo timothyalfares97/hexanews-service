@@ -3,6 +3,7 @@
  */
 
 import { CategoryController } from '../controllers/category.controller'
+import Config from '../constants/config'
 
 export default class CategoryRoutes {
 
@@ -10,7 +11,7 @@ export default class CategoryRoutes {
 
   public routes(app): void {
 
-    app.route('/categories')
+    app.route(Config.ENDPOINT.categories)
       .get(this.categoryController.getAll)
   }
 }
