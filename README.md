@@ -3,8 +3,8 @@ Hexanews is an online publishing platform web application for people who want to
 
 ## Requirements
 
-For development, you will only need Node.js installed on your environement.
-And please use the appropriate [VisualStudioCode](https://code.visualstudio.com/)for your Editor (not mandatory).
+For development, you will only need Node.js installed on your environment.
+And please use the appropriate [Visual Studio Code](https://code.visualstudio.com/) for your Editor (not mandatory).
 
 ### Node
 
@@ -56,7 +56,7 @@ $ npm run dev
 |/articles/:articleId  | PUT         |	API endpoint for editing a specific article based on its id              |
 |/articles/:articleId  | DELETE      |	API endpoint for deleting a specific article based on its id             |
 
-### Auth Endpoint
+### Authentication Endpoint
 
 |Node endpoint         | HTTP Method |Details                                                                    |
 |----------------------|-------------|---------------------------------------------------------------------------|
@@ -80,7 +80,7 @@ $ npm run dev
 |/users/:userId        | PUT         |	API endpoint for editing a specific user based on its id                 |
 |/users/:userId        | DELETE      |	API endpoint for deleting a specific user based on its id                |
 
-## Model schemas
+## Model Schemas
 
 ```
 User
@@ -114,7 +114,7 @@ Category
 } 
 ```
 
-## Project structure
+## Project Structure
 
 Here is the project structure that we have within the application with a brief description of it.
 
@@ -127,8 +127,8 @@ Hexanews-service
 │   ├── /models           where the model of application live
 │   ├── /routes           where the route of application live
 │   ├── /validations      where the validation of each route live
-│   ├── app.ts            The entry class for set up the application
-│   ├── server.ts         The entry point of application
+│   ├── app.ts            the entry class for set up the application
+│   ├── server.ts         the entry point of application
 ├── package.json          the whole configuration file with every dependency and script
 ├── tsconfig.json         typescript config file
 ├── tslint.json           typescript linter configuration file
