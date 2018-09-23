@@ -1,5 +1,5 @@
 /**
- * Schema model for user.
+ * Model for user with its attributes and types
  */
 
 import * as mongoose from 'mongoose'
@@ -10,6 +10,9 @@ import Config from '../constants/config'
 const Schema = mongoose.Schema
 const saltFactor = 10
 
+/**
+ * Specify the attributes and types of user
+ */
 export const UserSchema = new Schema({
   email: {
     type: String,
@@ -35,6 +38,9 @@ export const UserSchema = new Schema({
   }
 })
 
+/**
+ * Hash the user's password before it is saved to the database
+ */
 UserSchema.pre(Config.SAVE, async function () {
 
   if (this.isModified(Config.PASSWORD)) {
@@ -45,6 +51,9 @@ UserSchema.pre(Config.SAVE, async function () {
 
 })
 
+/**
+ * Verify if the given password matches the user's password
+ */
 UserSchema.methods.validPassword = async function (password) {
 
   try {
@@ -56,6 +65,9 @@ UserSchema.methods.validPassword = async function (password) {
 
 }
 
+/**
+ * Convert user object to JSON
+ */
 UserSchema.methods.toJSON = function() {
 
   const obj = this.toObject()
