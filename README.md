@@ -48,37 +48,37 @@ $ npm run dev
 
 ### Article Endpoint
 
-|Node endpoint| HTTP Method |Details|
-|--------|--------|--------|
-|/articles  | POST |	API endpoint for creating an article based on Article model. |
-|/articles  | GET |	API endpoint for getting all available articles within the application |
-|/articles/:articleId  | GET |	API endpoint for getting a specific article based on its id |
-|/articles/:articleId  | PUT |	API endpoint for editing a specific article based on its id |
-|/articles/:articleId  | DELETE |	API endpoint for deleting a specific article based on its id |
+|Node endpoint         | HTTP Method |Details                                                                    |
+|----------------------|-------------|---------------------------------------------------------------------------|
+|/articles             | POST        |	API endpoint for creating an article based on Article model              |
+|/articles             | GET         |	API endpoint for getting all available articles within the application   |
+|/articles/:articleId  | GET         |	API endpoint for getting a specific article based on its id              |
+|/articles/:articleId  | PUT         |	API endpoint for editing a specific article based on its id              |
+|/articles/:articleId  | DELETE      |	API endpoint for deleting a specific article based on its id             |
 
 ### Auth Endpoint
 
-|Node endpoint| HTTP Method |Details|
-|--------|--------|--------|
-|/auth/login  | POST |	API endpoint for logging in through application with email and password. |
-|/auth/changePassword  | POST |	API endpoint for changing password of a specific user |
-|/auth/resetPassword  | POST |	API endpoint for resetting password of a specific user |
+|Node endpoint         | HTTP Method |Details                                                                    |
+|----------------------|-------------|---------------------------------------------------------------------------|
+|/auth/login           | POST        |	API endpoint for logging in through application with email and password  |
+|/auth/changePassword  | POST        |	API endpoint for changing password of a specific user                    |
+|/auth/resetPassword   | POST        |	API endpoint for resetting password of a specific user                   |
 
 ### Category Endpoint
 
-|Node endpoint| HTTP Method |Details|
-|--------|--------|--------|
-|/categories  | GET |	API endpoint for getting all available categories within the application |
+|Node endpoint         | HTTP Method |Details                                                                    |
+|----------------------|-------------|---------------------------------------------------------------------------|
+|/categories           | GET         |	API endpoint for getting all available categories within the application |
 
 ### User Endpoint
 
-|Node endpoint| HTTP Method |Details|
-|--------|--------|--------|
-|/users  | POST |	API endpoint for creating a user based on User model. |
-|/users  | GET |	API endpoint for getting all available users within the application |
-|/users/:userId  | GET |	API endpoint for getting a specific user based on its id |
-|/users/:userId  | PUT |	API endpoint for editing a specific user based on its id |
-|/users/:userId  | DELETE |	API endpoint for deleting a specific user based on its id |
+|Node endpoint         | HTTP Method |Details                                                                    |
+|----------------------|-------------|---------------------------------------------------------------------------|
+|/users                | POST        |	API endpoint for creating a user based on User model                     |
+|/users                | GET         |	API endpoint for getting all available users within the application      |
+|/users/:userId        | GET         |	API endpoint for getting a specific user based on its id                 |
+|/users/:userId        | PUT         |	API endpoint for editing a specific user based on its id                 |
+|/users/:userId        | DELETE      |	API endpoint for deleting a specific user based on its id                |
 
 ## Model schemas
 
