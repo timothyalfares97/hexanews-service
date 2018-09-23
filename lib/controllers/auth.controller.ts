@@ -43,6 +43,9 @@ export class AuthController {
 
   }
 
+  /**
+   * Handles change password request.
+   */
   public changePassword = async (req: Request, res: Response) => {
 
     const { email, password, newPassword } = req.body
@@ -71,6 +74,9 @@ export class AuthController {
     }
   }
 
+  /**
+   * Handles reset password request.
+   */
   public resetPassword = async (req: Request, res: Response) => {
 
     const { email } = req.body

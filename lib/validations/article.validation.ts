@@ -1,5 +1,5 @@
 /**
- * Validations for article.
+ * Validates inputs for article server methods.
  */
 
 import * as Joi from 'joi'

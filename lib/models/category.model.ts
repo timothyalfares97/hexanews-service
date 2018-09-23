@@ -1,5 +1,5 @@
 /**
- * Schema model for Category.
+ * Schema model for category.
  */
 
 import * as mongoose from 'mongoose'
