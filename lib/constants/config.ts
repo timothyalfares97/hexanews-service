@@ -9,6 +9,7 @@ const PASSWORD = 'password'
 const MAX_VIEWS = 10000
 const JSON_WEB_TOKEN_ERROR = 'JsonWebTokenError'
 
+// Config for all endpoint paths
 const ENDPOINT = {
   articles: '/articles',
   article: '/articles/:articleId',
@@ -20,6 +21,7 @@ const ENDPOINT = {
   user: '/users/:userId'
 }
 
+// Config for all response code
 const RESPONSE_CODE = {
   success: 'SUCCESS',
   jwtError: 'JWTERROR',
