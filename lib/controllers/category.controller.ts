@@ -1,5 +1,5 @@
 /**
- * Controller for Category. Handles CRUD operation.
+ * A collection of server methods to handle categories
  */
 
 import * as mongoose from 'mongoose'
@@ -13,7 +13,7 @@ const Category = mongoose.model('Category', CategorySchema)
 export class CategoryController {
 
   /**
-   * Get all categories from the database.
+   * Get all existing categories
    */
   public getAll = async (_: Request, res: Response) => {
 

@@ -1,5 +1,5 @@
 /**
- * Controller for Article. Handles CRUD operation.
+ * A collection of server methods to handle articles
  */
 
 import * as mongoose from 'mongoose'
@@ -15,7 +15,7 @@ const Article = mongoose.model('Article', ArticleSchema)
 export class ArticleController {
 
   /**
-   * Create a new article into the database.
+   * Create a new article
    */
   public create = async (req: Request, res: Response) => {
 
@@ -36,7 +36,7 @@ export class ArticleController {
   }
 
   /**
-   * Get all articles from the database.
+   * Get all existing articles
    */
   public getAll = async (_: Request, res: Response) => {
 
@@ -50,7 +50,7 @@ export class ArticleController {
   }
 
   /**
-   * Get a single article based on its id.
+   * Get an article with the specified ID
    */
   public get = async (req: Request, res: Response) => {
 
@@ -64,7 +64,7 @@ export class ArticleController {
   }
 
   /**
-   * Find and update an article based on its id.
+   * Find and update an article with the specified ID
    */
   public update = async (req: Request, res: Response) => {
 
@@ -87,7 +87,7 @@ export class ArticleController {
   }
 
   /**
-   * Delete an article based on its id.
+   * Delete an article with the specified ID
    */
   public delete = async (req: Request, res: Response) => {
 

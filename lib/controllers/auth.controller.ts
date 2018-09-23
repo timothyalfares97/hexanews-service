@@ -1,5 +1,5 @@
 /**
- * Controller for authentication.
+ * A collection of server methods to handle authentication
  */
 
 import * as mongoose from 'mongoose'
@@ -18,7 +18,7 @@ const User = mongoose.model('User', UserSchema)
 export class AuthController {
 
   /**
-   * Handles login request.
+   * Authenticate user and provide an authentication token
    */
   public login = async (req: Request, res: Response) => {
 
@@ -44,7 +44,7 @@ export class AuthController {
   }
 
   /**
-   * Handles change password request.
+   * Change a user's password
    */
   public changePassword = async (req: Request, res: Response) => {
 
@@ -75,7 +75,7 @@ export class AuthController {
   }
 
   /**
-   * Handles reset password request.
+   * Reset a user's password and send the user a password reset email
    */
   public resetPassword = async (req: Request, res: Response) => {
 
