@@ -1,5 +1,5 @@
 /**
- * Server port configuration.
+ * Configures the server port
  */
 
 import app from './app'

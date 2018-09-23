@@ -1,5 +1,5 @@
 /**
- * Validates inputs for authentication server methods.
+ * Validates inputs for authentication server methods
  */
 
 import * as Joi from 'joi'

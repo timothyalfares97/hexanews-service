@@ -1,5 +1,5 @@
 /**
- * Constants for configuration strings
+ * All constants variable that related to configuration
  */
 
 const JWT_KEY = 'superSecret'

@@ -1,5 +1,5 @@
 /**
- * Constants for user messages strings
+ * All constants variable that related to messages
  */
 
 const AUTH_SUCCESS = 'Authentication successful.'

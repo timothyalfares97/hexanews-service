@@ -1,5 +1,6 @@
 /**
- * Main application.
+ * Entry point of the server app
+ * Configures the server
  */
 
 import * as express from 'express'
