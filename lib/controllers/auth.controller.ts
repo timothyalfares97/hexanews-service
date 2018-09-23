@@ -83,28 +83,35 @@ export class AuthController {
 
     try {
       const resettedUser = await User.findOne({ email: email })
-      const token = randToken.uid(8)
-      const options = {
-        auth: {
-          api_key: ''
+      if (!resettedUser) {
+        res.send({ message: Strings.AUTH_USER_NOT_FOUND, code: Config.RESPONSE_CODE.error })
+      } else {
+        const token = randToken.uid(8)
+        resettedUser.password = token
+        const options = {
+          auth: {
+            api_key: process.env.SENDGRID_API_KEY
+          }
         }
-      }
-      const smtpTransport = nodemailer.createTransport(sgTransport(options))
-      const mailOptions = {
-        to: email,
-        from: 'hexanews@admin.com',
-        subject: 'Hexanews Password Reset',
-        text: `hi ${resettedUser.name}, \n\n
-        You are receiving this because you (or someone else) have requested the reset of the password for your account.
-        Your new password is ${token}, please change your password immediately.
-        `
-      }
+        const smtpTransport = nodemailer.createTransport(sgTransport(options))
+        const mailOptions = {
+          to: resettedUser.email,
+          from: 'hexanews@admin.com',
+          subject: 'Hexanews Password Reset',
+          text: `Hi ${resettedUser.name}, \n\n
+            You are receiving this because you (or someone else) have requested the reset of the password for your account.\
+            Your new password is ${token}, please change your password immediately. \n\n
+            Regards, \n\n
+            Hexanews Team
+            `
+        }
 
-      await smtpTransport.sendMail(mailOptions)
-      await resettedUser.save()
-      res.json({ message: 'Password has successfully resetted' })
+        await smtpTransport.sendMail(mailOptions)
+        await resettedUser.save()
+        res.json({ message: Strings.AUTH_SUCCESS_RESET_PASSWORD, code: Config.RESPONSE_CODE.success })
+      }
     } catch (err) {
-      res.send(err)
+      res.send({ message: err, code: Config.RESPONSE_CODE.error })
     }
   }
 }
