@@ -1,5 +1,5 @@
 /**
- * Handles routing for article.
+ * Specify all routes for category
  */
 
 import { CategoryController } from '../controllers/category.controller'
@@ -11,6 +11,10 @@ export default class CategoryRoutes {
 
   public routes(app): void {
 
+    /**
+     * GET api/categories
+     * Get all existing categories
+     */
     app.route(Config.ENDPOINT.categories)
       .get(this.categoryController.getAll)
   }
