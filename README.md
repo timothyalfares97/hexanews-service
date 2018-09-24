@@ -139,11 +139,12 @@ Hexanews-service
 
 - [expressjs](https://github.com/expressjs/express) - Library for handling and routing HTTP requests
 - [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) - Library for generating JWT token in authentication
-- [mongoose](https://github.com/Automattic/mongoose) - Library for modeling and mapping MongoDB data to javascript
+- [mongoose](https://github.com/Automattic/mongoose) - Library for modeling and mapping MongoDB data to JavaScript
 - [bcrypt](https://github.com/kelektiv/node.bcrypt.js) - Library for hashing password in the application
+- [dotenv](https://github.com/motdotla/dotenv) - Library for loading configuration to environment variables in the application
 - [helmet](https://helmetjs.github.io/) - Library for securing https application header
 - [joi](https://github.com/hapijs/joi) - Library for route validation in the application
-- [node-mailer](https://nodemailer.com/about/) - Library for sending email through node JS
+- [node-mailer](https://nodemailer.com/about/) - Library for sending email through NodeJS
 
 ## Authors
 - **Timothy Alfares**
