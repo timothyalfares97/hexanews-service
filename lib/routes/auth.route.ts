@@ -16,21 +16,21 @@ export default class AuthRoutes {
   public routes(app): void {
 
     /**
-     * POST api/auth/login
+     * POST /auth/login
      * Log in the user
      */
     app.route(Config.ENDPOINT.login)
       .post(validate(validation.login), this.authController.login)
 
     /**
-     * POST api/auth/changePassword
+     * POST /auth/changePassword
      * Change a user's password
      */
     app.route(Config.ENDPOINT.changePassword)
       .post(validate(validation.changePassword), this.authController.changePassword)
 
     /**
-     * POST api/auth/resetPassword
+     * POST /auth/resetPassword
      * Reset a user's password
      */
     app.route(Config.ENDPOINT.resetPassword)

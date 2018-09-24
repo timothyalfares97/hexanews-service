@@ -12,7 +12,7 @@ export default class CategoryRoutes {
   public routes(app): void {
 
     /**
-     * GET api/categories
+     * GET /categories
      * Get all existing categories
      */
     app.route(Config.ENDPOINT.categories)

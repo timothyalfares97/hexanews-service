@@ -16,7 +16,7 @@ export default class ArticleRoutes {
   public routes(app): void {
 
     /**
-     * api/articles
+     * /articles
      */
     app.route(Config.ENDPOINT.articles)
       // GET - Get all existing articles
@@ -25,7 +25,7 @@ export default class ArticleRoutes {
       .post(validate(validation.create), this.articleController.create)
 
     /**
-     * api/articles/:articleId
+     * /articles/:articleId
      */
     app.route(Config.ENDPOINT.article)
       // GET - Get an article with the specified ID

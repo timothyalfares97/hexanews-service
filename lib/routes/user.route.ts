@@ -16,7 +16,7 @@ export default class UserRoutes {
   public routes(app): void {
 
     /**
-     * api/users
+     * /users
      */
     app.route(Config.ENDPOINT.users)
       // GET - Get all existing users
@@ -25,7 +25,7 @@ export default class UserRoutes {
       .post(validate(validation.create), this.userController.create)
 
     /**
-     * api/users/:userId
+     * /users/:userId
      */
     app.route(Config.ENDPOINT.user)
       // GET - Get a user with the specified ID
