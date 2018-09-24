@@ -75,7 +75,7 @@ export class UserController {
     const token = req.headers.token
 
     try {
-      await jwt.verify(token, Config.JWT_KEY)
+      await jwt.verify(token, process.env.JWT_KEY)
       const edittedUser = await User.findOneAndUpdate(updateCondition, user, updateOption)
       res.json({ message: edittedUser, code: Config.RESPONSE_CODE.success })
     } catch (err) {
@@ -96,7 +96,7 @@ export class UserController {
     const token = req.headers.token
 
     try {
-      await jwt.verify(token, Config.JWT_KEY)
+      await jwt.verify(token, process.env.JWT_KEY)
       await User.remove(deleteCondition)
       res.json({ message: Strings.USER_SUCCESS_DELETE, code: Config.RESPONSE_CODE.success })
     } catch (err) {

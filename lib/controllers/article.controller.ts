@@ -23,7 +23,7 @@ export class ArticleController {
     const token = req.headers.token
 
     try {
-      await jwt.verify(token, Config.JWT_KEY)
+      await jwt.verify(token, process.env.JWT_KEY)
       const savedArticle = await newArticle.save()
       res.json({ message: savedArticle, code: Config.RESPONSE_CODE.success })
     } catch (err) {
@@ -74,7 +74,7 @@ export class ArticleController {
     const token = req.headers.token
 
     try {
-      await jwt.verify(token, Config.JWT_KEY)
+      await jwt.verify(token, process.env.JWT_KEY)
       const edittedArticle = await Article.findOneAndUpdate(updateCondition, article, updateOption)
       res.json({ message: edittedArticle, code: Config.RESPONSE_CODE.success })
     } catch (err) {
@@ -95,7 +95,7 @@ export class ArticleController {
     const token = req.headers.token
 
     try {
-      await jwt.verify(token, Config.JWT_KEY)
+      await jwt.verify(token, process.env.JWT_KEY)
       await Article.remove(deleteCondition)
       res.json({ message: Strings.ARTICLE_SUCCESS_DELETED, code: Config.RESPONSE_CODE.success })
     } catch (err) {
