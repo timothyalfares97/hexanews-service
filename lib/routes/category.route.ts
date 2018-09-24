@@ -16,6 +16,7 @@ export default class CategoryRoutes {
      * Get all existing categories
      */
     app.route(Config.ENDPOINT.categories)
+      // GET - Get all existing categories
       .get(this.categoryController.getAll)
   }
 }

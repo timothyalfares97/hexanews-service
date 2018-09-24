@@ -31,7 +31,7 @@ export class AuthController {
       } else {
         const isValid = await loggedUser.validPassword(password)
         if (isValid) {
-          const token = jwt.sign({ data: loggedUser }, Config.JWT_KEY, { expiresIn: Config.JWT_EXPIRY })
+          const token = jwt.sign({ data: loggedUser }, process.env.JWT_KEY, { expiresIn: Config.JWT_EXPIRY })
           res.json({ message: Strings.AUTH_SUCCESS, id: loggedUser.id, token, code: Config.RESPONSE_CODE.success })
         } else {
           res.send({ message: Strings.AUTH_FAIL_INVALID_PASSWORD, code: Config.RESPONSE_CODE.error })
@@ -96,14 +96,9 @@ export class AuthController {
         const smtpTransport = nodemailer.createTransport(sgTransport(options))
         const mailOptions = {
           to: resettedUser.email,
-          from: 'admin@hexanews.com',
-          subject: 'Hexanews Password Reset',
-          text: `Hi ${resettedUser.name}, \n\n
-            You are receiving this email because you (or someone else) have requested to reset the password of your account. \n\n
-            Your new password is: ${token} \n\n
-            Please login and change your password immediately. \n\n
-            Regards, \n\n
-            Hexanews Team`
+          from: Config.EMAIL_CONFIG.from,
+          subject: Config.EMAIL_CONFIG.subject,
+          text: Config.EMAIL_CONFIG.content(resettedUser.name, token)
         }
 
         await smtpTransport.sendMail(mailOptions)

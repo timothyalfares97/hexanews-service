@@ -10,13 +10,14 @@ import * as cors from 'cors'
 import * as helmet from 'helmet'
 import * as dotenv from 'dotenv'
 
+import Config from './constants/config'
 import { Routes } from './routes/index.route'
 
 class App {
 
   public app: express.Application
   public routePrv: Routes = new Routes()
-  public mongoUrl: string = 'mongodb://hexanews:hexanews50!@ds133252.mlab.com:33252/hexanews'
+  public mongoUrl: string = ''
 
   constructor() {
     this.app = express()
@@ -30,12 +31,13 @@ class App {
     dotenv.config()
 
     this.app.use(cors())
-    this.app.use(bodyParser.json({ limit: '5mb' }))
+    this.app.use(bodyParser.json({ limit: Config.JSON_LIMIT }))
     this.app.use(bodyParser.urlencoded({ extended: false }))
     this.app.use(helmet())
   }
 
   private mongoSetup(): void {
+    this.mongoUrl =  process.env.MONGO_DB_URL
     mongoose.Promise = global.Promise
     mongoose.connect(this.mongoUrl)
   }

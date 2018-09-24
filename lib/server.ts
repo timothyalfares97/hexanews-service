@@ -3,9 +3,10 @@
  */
 
 import app from './app'
+import Config from './constants/config'
 
-const PORT = 4000
+const PORT = Config.PORT_NUMBER
 
 app.listen(PORT, () => {
-  console.log('Express server listening on port ' + PORT)
+  console.log(Config.EXPRESS_LISTENING + PORT)
 })
