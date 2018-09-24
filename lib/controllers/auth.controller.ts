@@ -52,7 +52,7 @@ export class AuthController {
     const token = req.headers.token
 
     try {
-      await jwt.verify(token, Config.JWT_KEY)
+      await jwt.verify(token, process.env.JWT_KEY)
       const currentUser = await User.findOne({ email: email })
       if (!currentUser) {
         res.send({ message: Strings.AUTH_USER_NOT_FOUND, code: Config.RESPONSE_CODE.error })

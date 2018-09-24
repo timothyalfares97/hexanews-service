@@ -2,7 +2,6 @@
  * All constants variable that related to configuration
  */
 
-const JWT_KEY = 'superSecret'
 const JWT_EXPIRY = '2 days'
 const SAVE = 'save'
 const PASSWORD = 'password'
@@ -47,7 +46,6 @@ const RESPONSE_CODE = {
 
 export default {
   PORT_NUMBER,
-  JWT_KEY,
   JWT_EXPIRY,
   JSON_WEB_TOKEN_ERROR,
   EXPRESS_LISTENING,
