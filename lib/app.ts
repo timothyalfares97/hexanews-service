@@ -8,6 +8,7 @@ import * as bodyParser from 'body-parser'
 import * as mongoose from 'mongoose'
 import * as cors from 'cors'
 import * as helmet from 'helmet'
+import * as dotenv from 'dotenv'
 
 import { Routes } from './routes/index.route'
 
@@ -25,6 +26,9 @@ class App {
   }
 
   private config(): void {
+    // Loads all sensitive information from the environment variables
+    dotenv.config()
+
     this.app.use(cors())
     this.app.use(bodyParser.json({ limit: '5mb' }))
     this.app.use(bodyParser.urlencoded({ extended: false }))

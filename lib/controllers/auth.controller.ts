@@ -90,7 +90,7 @@ export class AuthController {
         resettedUser.password = token
         const options = {
           auth: {
-            api_key: ''
+            api_key: process.env.SENDGRID_API_KEY
           }
         }
         const smtpTransport = nodemailer.createTransport(sgTransport(options))
