@@ -90,20 +90,20 @@ export class AuthController {
         resettedUser.password = token
         const options = {
           auth: {
-            api_key: process.env.SENDGRID_API_KEY
+            api_key: ''
           }
         }
         const smtpTransport = nodemailer.createTransport(sgTransport(options))
         const mailOptions = {
           to: resettedUser.email,
-          from: 'hexanews@admin.com',
+          from: 'admin@hexanews.com',
           subject: 'Hexanews Password Reset',
           text: `Hi ${resettedUser.name}, \n\n
-            You are receiving this because you (or someone else) have requested the reset of the password for your account.\
-            Your new password is ${token}, please change your password immediately. \n\n
+            You are receiving this email because you (or someone else) have requested to reset the password of your account. \n\n
+            Your new password is: ${token} \n\n
+            Please login and change your password immediately. \n\n
             Regards, \n\n
-            Hexanews Team
-            `
+            Hexanews Team`
         }
 
         await smtpTransport.sendMail(mailOptions)
