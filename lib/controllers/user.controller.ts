@@ -16,6 +16,9 @@ export class UserController {
 
   /**
    * Create a new user
+   * @property {User} req.body user properties
+   * @property {string} req.body.email user's email
+   * @return the new user if success, otherwise the error key
    */
   public create = async (req: Request, res: Response) => {
 
@@ -23,6 +26,7 @@ export class UserController {
     const { email } = req.body
 
     try {
+      // Check if email is already used for existing users
       const existingUsers = await User.find({ email: email })
       if (existingUsers.length > 0) {
         res.send({ message: Strings.USER_FAIL_ALREADY_EXISTED, code: Config.RESPONSE_CODE.error })
@@ -38,6 +42,7 @@ export class UserController {
 
   /**
    * Get all existing users
+   * @return a collection of all existing users
    */
   public getAll = async (req: Request, res: Response) => {
 
@@ -52,6 +57,8 @@ export class UserController {
 
   /**
    * Get a user with the specified ID
+   * @param userId ID of the user
+   * @return user with the specified ID
    */
   public get = async (req: Request, res: Response) => {
 
@@ -66,6 +73,10 @@ export class UserController {
 
   /**
    * Find and update a user with the specified ID
+   * @param userId ID of the user to be updated
+   * @property {User} req.body user properties
+   * @property {string} req.headers.token user's jwt token
+   * @return the editted user if success, otherwise the error key
    */
   public update = async (req: Request, res: Response) => {
 
@@ -89,6 +100,9 @@ export class UserController {
 
   /**
    * Delete a user with the specified ID
+   * @param userId ID of the user to be deleted
+   * @property {string} req.headers.token user's jwt token
+   * @return user deleted success key, otherwise the error key
    */
   public delete = async (req: Request, res: Response) => {
 
