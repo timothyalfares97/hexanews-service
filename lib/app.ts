@@ -19,6 +19,9 @@ class App {
   public routePrv: Routes = new Routes()
   public mongoUrl: string = ''
 
+  /**
+   * Constructor to setup the application
+   */
   constructor() {
     this.app = express()
     this.config()
@@ -26,6 +29,9 @@ class App {
     this.mongoSetup()
   }
 
+  /**
+   * Configures the application
+   */
   private config(): void {
     // Loads all sensitive information from the environment variables
     dotenv.config()
@@ -36,6 +42,9 @@ class App {
     this.app.use(helmet())
   }
 
+  /**
+   * Setup MongoDB database with mongoose
+   */
   private mongoSetup(): void {
     this.mongoUrl =  process.env.MONGO_DB_URL
     mongoose.Promise = global.Promise

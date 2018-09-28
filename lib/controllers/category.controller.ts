@@ -14,6 +14,7 @@ export class CategoryController {
 
   /**
    * Get all existing categories
+   * @return a collection of all existing categories
    */
   public getAll = async (_: Request, res: Response) => {
 

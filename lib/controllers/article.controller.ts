@@ -15,6 +15,9 @@ export class ArticleController {
 
   /**
    * Create a new article
+   * @property {Article} req.body article properties
+   * @property {string} req.headers.token user's jwt token
+   * @return the saved article if success, otherwise the error key
    */
   public create = async (req: Request, res: Response) => {
 
@@ -36,6 +39,7 @@ export class ArticleController {
 
   /**
    * Get all existing articles
+   * @return a collection of all existing articles
    */
   public getAll = async (_: Request, res: Response) => {
 
@@ -50,6 +54,8 @@ export class ArticleController {
 
   /**
    * Get an article with the specified ID
+   * @param articleId ID of the article
+   * @return article with the specified ID
    */
   public get = async (req: Request, res: Response) => {
 
@@ -64,6 +70,10 @@ export class ArticleController {
 
   /**
    * Find and update an article with the specified ID
+   * @param articleId ID of the article to be updated
+   * @property {Article} req.body article properties
+   * @property {string} req.headers.token user's jwt token
+   * @return the editted article if success, otherwise the error key
    */
   public update = async (req: Request, res: Response) => {
 
@@ -87,6 +97,9 @@ export class ArticleController {
 
   /**
    * Delete an article with the specified ID
+   * @param articleId ID of the article to be deleted
+   * @property {string} req.headers.token user's jwt token
+   * @return article deleted success key, otherwise the error key
    */
   public delete = async (req: Request, res: Response) => {
 
