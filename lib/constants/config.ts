@@ -44,16 +44,35 @@ const RESPONSE_CODE = {
   error: 'ERROR'
 }
 
+// Config for all error message code
+const ERROR_MESSAGE = {
+  invalidPassword: 'INVALID_PASSWORD',
+  userNotFound: 'USER_NOT_FOUND',
+  userExisted: 'USER_EXISTED',
+  sessionExpired: 'SESSION_EXPIRED'
+}
+
+// Config for all success message code
+const SUCCESS_MESSAGE = {
+  authSuccess: 'AUTH_SUCCESS',
+  changePasswordSuccess: 'CHANGE_PASSWORD_SUCCESS',
+  resetPasswordSuccess: 'RESET_PASSWORD_SUCCESS',
+  userDeletedSuccess: 'USER_DELETE_SUCCESS',
+  articleDeletedSuccess: 'ARTICLE_DELETE_SUCCESS'
+}
+
 export default {
-  PORT_NUMBER,
-  JWT_EXPIRY,
-  JSON_WEB_TOKEN_ERROR,
-  EXPRESS_LISTENING,
-  SAVE,
-  JSON_LIMIT,
-  PASSWORD,
-  MAX_VIEWS,
+  EMAIL_CONFIG,
   ENDPOINT,
+  ERROR_MESSAGE,
+  EXPRESS_LISTENING,
+  JSON_LIMIT,
+  JSON_WEB_TOKEN_ERROR,
+  JWT_EXPIRY,
+  MAX_VIEWS,
+  PASSWORD,
+  PORT_NUMBER,
   RESPONSE_CODE,
-  EMAIL_CONFIG
+  SAVE,
+  SUCCESS_MESSAGE
 }

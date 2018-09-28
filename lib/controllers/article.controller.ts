@@ -8,7 +8,6 @@ import { Request, Response } from 'express'
 
 import { ArticleSchema } from '../models/article.model'
 import Config from '../constants/config'
-import Strings from '../constants/string'
 
 const Article = mongoose.model('Article', ArticleSchema)
 
@@ -28,7 +27,7 @@ export class ArticleController {
       res.json({ message: savedArticle, code: Config.RESPONSE_CODE.success })
     } catch (err) {
       let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR ?
-        { message: Strings.JWT_SESSION_EXPIRED, code: Config.RESPONSE_CODE.jwtError } :
+        { message: Config.ERROR_MESSAGE.sessionExpired, code: Config.RESPONSE_CODE.jwtError } :
         { message: err, code: Config.RESPONSE_CODE.error }
       res.send(mappedError)
     }
@@ -79,7 +78,7 @@ export class ArticleController {
       res.json({ message: edittedArticle, code: Config.RESPONSE_CODE.success })
     } catch (err) {
       let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR ?
-        { message: Strings.JWT_SESSION_EXPIRED, code: Config.RESPONSE_CODE.jwtError } :
+        { message: Config.ERROR_MESSAGE.sessionExpired, code: Config.RESPONSE_CODE.jwtError } :
         { message: err, code: Config.RESPONSE_CODE.error }
       res.send(mappedError)
     }
@@ -97,10 +96,10 @@ export class ArticleController {
     try {
       await jwt.verify(token, process.env.JWT_KEY)
       await Article.remove(deleteCondition)
-      res.json({ message: Strings.ARTICLE_SUCCESS_DELETED, code: Config.RESPONSE_CODE.success })
+      res.json({ message: Config.SUCCESS_MESSAGE.articleDeletedSuccess, code: Config.RESPONSE_CODE.success })
     } catch (err) {
       let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR ?
-        { message: Strings.JWT_SESSION_EXPIRED, code: Config.RESPONSE_CODE.jwtError } :
+        { message: Config.ERROR_MESSAGE.sessionExpired, code: Config.RESPONSE_CODE.jwtError } :
         { message: err, code: Config.RESPONSE_CODE.error }
       res.send(mappedError)
     }

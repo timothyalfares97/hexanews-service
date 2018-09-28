@@ -8,7 +8,6 @@ import { Request, Response } from 'express'
 
 import { UserSchema } from '../models/user.model'
 import Config from '../constants/config'
-import Strings from '../constants/string'
 
 const User = mongoose.model('User', UserSchema)
 
@@ -25,7 +24,7 @@ export class UserController {
     try {
       const existingUsers = await User.find({ email: email })
       if (existingUsers.length > 0) {
-        res.send({ message: Strings.USER_FAIL_ALREADY_EXISTED, code: Config.RESPONSE_CODE.error })
+        res.send({ message: Config.ERROR_MESSAGE.userExisted, code: Config.RESPONSE_CODE.error })
       } else {
         const savedUser = await newUser.save()
         res.json({ message: savedUser, code: Config.RESPONSE_CODE.success })
@@ -39,7 +38,7 @@ export class UserController {
   /**
    * Get all existing users
    */
-  public getAll = async (req: Request, res: Response) => {
+  public getAll = async (_: Request, res: Response) => {
 
     try {
       const users = await User.find()
@@ -80,7 +79,7 @@ export class UserController {
       res.json({ message: edittedUser, code: Config.RESPONSE_CODE.success })
     } catch (err) {
       let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR ?
-        { message: Strings.JWT_SESSION_EXPIRED, code: Config.RESPONSE_CODE.jwtError } :
+        { message: Config.ERROR_MESSAGE.sessionExpired, code: Config.RESPONSE_CODE.jwtError } :
         { message: err, code: Config.RESPONSE_CODE.error }
       res.send(mappedError)
     }
@@ -98,7 +97,7 @@ export class UserController {
     try {
       await jwt.verify(token, process.env.JWT_KEY)
       await User.remove(deleteCondition)
-      res.json({ message: Strings.USER_SUCCESS_DELETE, code: Config.RESPONSE_CODE.success })
+      res.json({ message: Config.SUCCESS_MESSAGE.userDeletedSuccess, code: Config.RESPONSE_CODE.success })
     } catch (err) {
       res.send({ message: err, code: Config.RESPONSE_CODE.error })
     }
