@@ -27,7 +27,7 @@ export class AuthController {
     const { email, password } = req.body
 
     try {
-      // Check if user exists
+      // Check if there is a user based on the login detail
       const loggedUser = await User.findOne({ email: email })
       if (!loggedUser) {
         res.send({ message: Config.ERROR_MESSAGE.userNotFound, code: Config.RESPONSE_CODE.error })
@@ -64,6 +64,7 @@ export class AuthController {
       // Verify jwt token and check if user exists
       await jwt.verify(token, process.env.JWT_KEY)
       const currentUser = await User.findOne({ email: email })
+      // Check if there is a user based on the login detail
       if (!currentUser) {
         res.send({ message: Config.ERROR_MESSAGE.userNotFound, code: Config.RESPONSE_CODE.error })
       } else {
@@ -96,7 +97,7 @@ export class AuthController {
     const { email } = req.body
 
     try {
-      // Check if user exists
+      // Check if there is a user based on the login detail
       const resettedUser = await User.findOne({ email: email })
       if (!resettedUser) {
         res.send({ message: Config.ERROR_MESSAGE.userNotFound, code: Config.RESPONSE_CODE.error })
@@ -110,7 +111,7 @@ export class AuthController {
           }
         }
 
-        // Create the mail
+        // Create the mail with specific configuration
         const smtpTransport = nodemailer.createTransport(sgTransport(options))
         const mailOptions = {
           to: resettedUser.email,
@@ -119,7 +120,7 @@ export class AuthController {
           text: Config.EMAIL_CONFIG.content(resettedUser.name, token)
         }
 
-        // Send the mail
+        // Send the mail using smtpTransport and then saved the user
         await smtpTransport.sendMail(mailOptions)
         await resettedUser.save()
         res.json({ message: Config.SUCCESS_MESSAGE.resetPasswordSuccess, code: Config.RESPONSE_CODE.success })
