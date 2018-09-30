@@ -89,7 +89,7 @@ export class UserController {
       const edittedUser = await User.findOneAndUpdate(updateCondition, user, updateOption)
       res.json({ message: edittedUser, code: Config.RESPONSE_CODE.success })
     } catch (err) {
-      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR ?
+      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR || err.name === Config.TOKEN_EXPIRED_ERROR ?
         { message: Config.ERROR_MESSAGE.sessionExpired, code: Config.RESPONSE_CODE.jwtError } :
         { message: err, code: Config.RESPONSE_CODE.error }
       res.send(mappedError)
@@ -113,7 +113,10 @@ export class UserController {
       await User.remove(deleteCondition)
       res.json({ message: Config.SUCCESS_MESSAGE.userDeletedSuccess, code: Config.RESPONSE_CODE.success })
     } catch (err) {
-      res.send({ message: err, code: Config.RESPONSE_CODE.error })
+      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR || err.name === Config.TOKEN_EXPIRED_ERROR ?
+        { message: Config.ERROR_MESSAGE.sessionExpired, code: Config.RESPONSE_CODE.jwtError } :
+        { message: err, code: Config.RESPONSE_CODE.error }
+      res.send(mappedError)
     }
 
   }

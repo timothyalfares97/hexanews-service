@@ -80,7 +80,7 @@ export class AuthController {
         }
       }
     } catch (err) {
-      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR ?
+      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR || err.name === Config.TOKEN_EXPIRED_ERROR ?
         { message: Config.ERROR_MESSAGE.sessionExpired, code: Config.RESPONSE_CODE.jwtError } :
         { message: err, code: Config.RESPONSE_CODE.error }
       res.send(mappedError)

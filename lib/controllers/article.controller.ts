@@ -29,7 +29,7 @@ export class ArticleController {
       const savedArticle = await newArticle.save()
       res.json({ message: savedArticle, code: Config.RESPONSE_CODE.success })
     } catch (err) {
-      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR ?
+      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR || err.name === Config.TOKEN_EXPIRED_ERROR ?
         { message: Config.ERROR_MESSAGE.sessionExpired, code: Config.RESPONSE_CODE.jwtError } :
         { message: err, code: Config.RESPONSE_CODE.error }
       res.send(mappedError)
@@ -87,7 +87,7 @@ export class ArticleController {
       const edittedArticle = await Article.findOneAndUpdate(updateCondition, article, updateOption)
       res.json({ message: edittedArticle, code: Config.RESPONSE_CODE.success })
     } catch (err) {
-      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR ?
+      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR || err.name === Config.TOKEN_EXPIRED_ERROR ?
         { message: Config.ERROR_MESSAGE.sessionExpired, code: Config.RESPONSE_CODE.jwtError } :
         { message: err, code: Config.RESPONSE_CODE.error }
       res.send(mappedError)
@@ -111,7 +111,7 @@ export class ArticleController {
       await Article.remove(deleteCondition)
       res.json({ message: Config.SUCCESS_MESSAGE.articleDeletedSuccess, code: Config.RESPONSE_CODE.success })
     } catch (err) {
-      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR ?
+      let mappedError = err.name === Config.JSON_WEB_TOKEN_ERROR || err.name === Config.TOKEN_EXPIRED_ERROR ?
         { message: Config.ERROR_MESSAGE.sessionExpired, code: Config.RESPONSE_CODE.jwtError } :
         { message: err, code: Config.RESPONSE_CODE.error }
       res.send(mappedError)

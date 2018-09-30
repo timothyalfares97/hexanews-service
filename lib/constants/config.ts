@@ -7,6 +7,7 @@ const SAVE = 'save'
 const PASSWORD = 'password'
 const MAX_VIEWS = 10000
 const JSON_WEB_TOKEN_ERROR = 'JsonWebTokenError'
+const TOKEN_EXPIRED_ERROR = 'TokenExpiredError'
 const JSON_LIMIT = '5mb'
 const PORT_NUMBER = 4000
 const EXPRESS_LISTENING = 'Express server listening on port '
@@ -68,6 +69,7 @@ export default {
   EXPRESS_LISTENING,
   JSON_LIMIT,
   JSON_WEB_TOKEN_ERROR,
+  TOKEN_EXPIRED_ERROR,
   JWT_EXPIRY,
   MAX_VIEWS,
   PASSWORD,
