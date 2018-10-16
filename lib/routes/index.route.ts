@@ -1,5 +1,5 @@
 /**
- * Main router of the application when the /api is used
+ * Main router of the application when the api is used
  * Route to the next router based on the path
  */
 

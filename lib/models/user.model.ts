@@ -66,7 +66,7 @@ UserSchema.methods.validPassword = async function (password) {
 }
 
 /**
- * Convert user object to JSON
+ * Convert user object to JSON and delete password attribute to secure the data send back to client side
  */
 UserSchema.methods.toJSON = function() {
 
